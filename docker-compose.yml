@@ -1,0 +1,21 @@
+version: "3.8"
+
+# Minimal docker-compose for initial repository
+
+services:
+  # Data generator service
+  data-generator:
+    build:
+      context: ./data_generator
+    container_name: data-generator
+    volumes:
+      - ./data:/data
+    environment:
+      - DATA_FILE_SIZE_GB=${DATA_FILE_SIZE_GB:-16}
+      - NUM_LARGE_FILES=${NUM_LARGE_FILES:-2}
+      - DATA_OUTPUT_DIR=/data
+      - CORRUPTION_RATE=${CORRUPTION_RATE:-0.001}
+      - MISSING_DATA_RATE=${MISSING_DATA_RATE:-0.05}
+      - DUPLICATE_RATE=${DUPLICATE_RATE:-0.02}
+      - OUTLIER_RATE=${OUTLIER_RATE:-0.01}
+
